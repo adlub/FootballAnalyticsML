@@ -14,10 +14,11 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 import matplotlib.pyplot as plt
 
+#Function to help with maths calculations
 def square(num):
     return num * num
 
-
+#Creation of shots dataframe with the appropriate calculations
 RM_df = pd.read_csv('RealMadrid2019shots.csv')
 label_encoder = LabelEncoder()
 RM_df['h_a'] = label_encoder.fit_transform(RM_df['h_a'])
@@ -49,18 +50,22 @@ S_Angle = I * 180/math.pi
 
 RM_df_2 = RM_df_2.assign(ShotAngle=S_Angle)
 
+"""
+#Uncomment to look at dataframe created
 
-
-
-
+print(RM_df_2)
+"""
 
 X = RM_df_2[['ShotDistance', 'ShotAngle', 'shotType']]
 
 
 y = RM_df_2['Goal']
 
-print(X)
+
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, random_state=42)
+
+
+#Logistic Regression Calculations - Shot Distance feature
 
 lr_1 = LogisticRegression()
 lr_1.fit(X_train[['ShotDistance']], y_train)
@@ -77,11 +82,23 @@ plt.ylabel('Probability of Goal')
 plt.title('Logistic Regression Curve for ShotDistance')
 plt.legend()
 
+coef_ShotDistance = lr_1.coef_[0][0]
+coef_D_Intercept = lr_1.intercept_[0]
+
+with open ("shotDistanceModel.txt", "w") as file:
+    file.write("coef_ShotDistance: " + str(-1* coef_ShotDistance))
+    file.write("\ncoef_D_Intercept: " + str(-1*coef_D_Intercept))
+    
+
+
+
+#Logistic Regression Calculations - Shot Angle feature
+
 lr_2 = LogisticRegression()
 lr_2.fit(X_train[['ShotAngle']], y_train)
 
 x2_values = np.linspace(X_test['ShotAngle'].min() - 1, X_test['ShotAngle'].max() + 1, 2000)
-probs_feature2 = lr_2.predict_proba(x1_values.reshape(-1, 1))[:, 1]
+probs_feature2 = lr_2.predict_proba(x2_values.reshape(-1, 1))[:, 1]
 
 plt.subplot(1, 2, 2)
 plt.plot(x2_values, probs_feature2, marker='o', linestyle='-')
@@ -91,16 +108,18 @@ plt.ylabel('Probability of Goal')
 plt.title('Logistic Regression Curve for ShotAngle')
 plt.legend()
 
-coef_feature1 = lr_1.coef_[0][0]
-intercept_feature1 = lr_1.intercept_[0]
+coef_ShotAngle = lr_2.coef_[0][0]
+coef_SA_intercept = lr_2.intercept_[0]
 
-# Extract coefficients and intercept for Feature 2
-coef_feature2 = lr_2.coef_[0][0]
-intercept_feature2 = lr_2.intercept_[0]
+with open ("shotAngleModel.txt", "w") as file:
+    file.write("coef_ShotAngle: " + str(-1* coef_ShotAngle))
+    file.write("\ncoef_SA_intercept: " + str(-1*coef_SA_intercept))
 
 
-print(f"Equation for Logistic Regression Curve of Feature 1: P(Y=1) = 1 / (1 + e^({-intercept_feature1} + {coef_feature1} * X))")
-print(f"Equation for Logistic Regression Curve of Feature 2: P(Y=1) = 1 / (1 + e^({-intercept_feature2} + {coef_feature2} * X))")
+
+
+print(f"Equation for Logistic Regression Curve of Shot Distance Feature: P(Y=1) = 1 / (1 + e^({-coef_D_Intercept} + {coef_ShotDistance} * X))")
+print(f"Equation for Logistic Regression Curve of Shot Angle Feature: P(Y=1) = 1 / (1 + e^({-coef_SA_intercept} + {coef_ShotAngle} * X))")
 
 lr_combined = LogisticRegression()
 lr_combined.fit(X_train[['ShotDistance', 'ShotAngle', 'shotType']], y_train)

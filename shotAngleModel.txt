@@ -1,0 +1,2 @@
+coef_ShotAngle: -0.04296144048980804
+coef_SA_intercept: 3.0849207519139323
