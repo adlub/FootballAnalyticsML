@@ -14,9 +14,11 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 import matplotlib.pyplot as plt
 
+#Function to help with maths calculations
 def square(num):
     return num * num
 
+#Creation of shots dataframe with the appropriate calculations
 RM_df = pd.read_csv('RealMadrid2019shots.csv')
 label_encoder = LabelEncoder()
 RM_df['h_a'] = label_encoder.fit_transform(RM_df['h_a'])
@@ -48,21 +50,15 @@ S_Angle = I * 180/math.pi
 
 RM_df_2 = RM_df_2.assign(ShotAngle=S_Angle)
 
-
-
-
-
-
 X = RM_df_2[['ShotDistance', 'ShotAngle', 'shotType']]
-
 
 y = RM_df_2['Goal']
 
-print(X)
+
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, random_state=42)
 
 
-
+#Gradient Boosting Classifier Creation
 gbm = GradientBoostingClassifier(n_estimators=100, learning_rate = 0.01, random_state=42)
 
 gbm.fit(X_train, y_train)
@@ -80,9 +76,6 @@ y_pred_proba = gbm.predict_proba(X_test)[:,1]
 fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred_proba)
 roc_auc = auc(fpr, tpr)
 
-
-
-
 plt.figure(figsize=(8, 6))
 plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
 
@@ -95,6 +88,8 @@ plt.title('Receiver Operating Characteristic (ROC) Curve')
 plt.legend(loc='lower right')
 plt.show()
 
+
+#xGBoost Classifier creation
 xgb_clf = XGBClassifier(n_estimators=100, learning_rate = 0.00001, random_state=42)
 xgb_clf.fit(X_train, y_train)
 xgb_pred = xgb_clf.predict(X_test)
@@ -102,6 +97,8 @@ xgb_pred = xgb_clf.predict(X_test)
 xgb_accuracy = accuracy_score(y_test, xgb_pred)
 xgb_precision = precision_score(y_test, xgb_pred)
 xgb_recall = recall_score (y_test, xgb_pred)
+
+print("\nXGBoost Model")
 
 print(f'Accuracy: {xgb_accuracy:.2f}')
 print(f'Precision: {xgb_precision:.2f}')

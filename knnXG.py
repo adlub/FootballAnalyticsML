@@ -16,12 +16,12 @@ from sklearn import metrics
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
-
-
+#Function to help with maths calculations
 def square(num):
     return num * num
 
 
+#Creation of shots dataframe with the appropriate calculations
 RM_df = pd.read_csv('RealMadrid2019shots.csv')
 label_encoder = LabelEncoder()
 RM_df['h_a'] = label_encoder.fit_transform(RM_df['h_a'])
@@ -58,14 +58,17 @@ X = RM_df_2[['ShotDistance', 'ShotAngle', 'shotType']]
 
 y = RM_df_2['Goal']
 
-print(X)
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, random_state=42)
 
+
+
+#K Nearest Neighbour Classifier creation
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 
+#Optimal K value found by using graph (refer to commented code)
 knn = KNeighborsClassifier(n_neighbors=8)
 knn.fit(X_train, y_train)
 y_pred = knn.predict(X_test)

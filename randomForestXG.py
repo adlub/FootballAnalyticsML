@@ -15,10 +15,12 @@ from scipy.stats import randint
 from sklearn.preprocessing import LabelEncoder
 from sklearn import metrics
 import matplotlib.pyplot as plt
+
+#Function to help with maths calculations
 def square(num):
     return num * num
 
-
+#Creation of shots dataframe with the appropriate calculations
 RM_df = pd.read_csv('RealMadrid2019shots.csv')
 label_encoder = LabelEncoder()
 RM_df['h_a'] = label_encoder.fit_transform(RM_df['h_a'])
@@ -57,18 +59,15 @@ X = RM_df_2[['ShotDistance', 'ShotAngle', 'shotType']]
 
 y = RM_df_2['Goal']
 
-print(X)
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.2, random_state=42)
+
+
+
+#Random Forest Classifier creation & finding the best model
+rf = RandomForestClassifier()
 
 param_dist = {'n_estimators': randint(100,500),
               'max_depth': randint(1,20)}
-
-
-
-
-
-
-rf = RandomForestClassifier()
 
 rand_search = RandomizedSearchCV(rf, 
                                  param_distributions = param_dist, 
@@ -79,8 +78,6 @@ rand_search.fit(X_train, y_train)
 
 # Create a variable for the best model
 best_rf = rand_search.best_estimator_
-
-
 
 y_pred = best_rf.predict(X_test)
 
@@ -104,7 +101,7 @@ print("Recall:", recall)
 #Creats data for a bar chat showing feature importances from the model and feature names from the training data
 feature_importances = pd.Series(best_rf.feature_importances_, index=X_train.columns).sort_values(ascending=False)
 
-# Plotthe bar chart
+# Plot the bar chart
 feature_importances.plot.bar();
 plt.show()
 
