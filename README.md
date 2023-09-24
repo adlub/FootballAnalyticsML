@@ -69,7 +69,7 @@ If not installed already, be sure to install the XGBoost and tensorflow packages
   pip install xgboost
   pip install tensorflow
   ```
-Before running any code, make sure you have a relevant .csv file containing football shot data in the same folder as the project. You can download the .csv file by following the instructions [**here**] (https://sagnikdas1.medium.com/extract-seasonal-shot-data-for-one-team-from-understat-in-r-8686d7224376)
+Before running any code, make sure you have a relevant .csv file containing football shot data in the same folder as the project. You can download the .csv file by following the instructions [**here**](https://sagnikdas1.medium.com/extract-seasonal-shot-data-for-one-team-from-understat-in-r-8686d7224376)
 
 After downloading the .csv file, follow the instructions in `Excel_Preprocessing_Instrutions.txt` (In the future, I plan to remove the need for this and include this part of the preprocessing in the .py files so you dont have to do this annoying bit!)
 
