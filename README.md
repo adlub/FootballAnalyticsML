@@ -71,13 +71,15 @@ If not installed already, be sure to install the XGBoost and tensorflow packages
   ```
 Before running any code, make sure you have a relevant .csv file containing football shot data in the same folder as the project. You can download the .csv file by following the instructions [**here**] (https://sagnikdas1.medium.com/extract-seasonal-shot-data-for-one-team-from-understat-in-r-8686d7224376)
 
+After downloading the .csv file, follow the instructions in `Excel_Preprocessing_Instrutions.txt` (In the future, I plan to remove the need for this and include this part of the preprocessing in the .py files so you dont have to do this annoying bit!)
+
 ### Running the code
 
 I recommend running `logisticRegressionXG.py` first. As well as the relevant plots, this will create two .txt files containing coefficients for the logistic regression curve corresponding to the created model. After this, run `LRShotAngleCurve.py` and `LRShotDistanceCurve.py`. These files will read the aforementioned .txt files and plot the logistic regression curves based on the coefficients in these files.
 
 Once you have run these files, you can then run the other python files (in any order) that correspond to the use of other classification models on football shot data. 
 
-`Classification Results.xlsx` contains the performance metrics of all the models used in this project. This file currently contains data from when I personally ran the models on Real Madrid's shot data from 2019 (extracted using the site linked above). You can change the data at your discretion when you run the models yourself.
+`Classification_Results.xlsx` contains the performance metrics of all the models used in this project. This file currently contains data from when I personally ran the models on Real Madrid's shot data from 2019 (extracted using the site linked above). You can change the data at your discretion when you run the models yourself.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
