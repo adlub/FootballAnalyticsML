@@ -1,0 +1,8 @@
+1. Open the .csv file with microsoft excel 
+2. Add a new column
+3. Give this column the column title 'Goal'
+4. Locate the column with the title 'result' and note the cell of the first entry after the title (in this example, I will say C2)
+5. Select the 2nd cell in the new column you have created and enter this formula in the cell : =IF(C2="Goal", 1, 0) and press enter, you should have a 1 or 0 displayed in this cell
+6. Hover your mouse over the small square in the lower-right corner of the cell that now displays 1 or 0 until it turns into a black crosshair
+7. Click and drag down to apply the formula for all the rows in your new column that correspond to the data in the 'result column'
+8. Your new column should now display 0 and 1 values (1 for Goal and 0 for everything else)

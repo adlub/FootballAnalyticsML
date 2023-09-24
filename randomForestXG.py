@@ -21,7 +21,7 @@ def square(num):
     return num * num
 
 #Creation of shots dataframe with the appropriate calculations
-RM_df = pd.read_csv('RealMadrid2019shots.csv')
+RM_df = pd.read_csv('yourfilename.csv')
 label_encoder = LabelEncoder()
 RM_df['h_a'] = label_encoder.fit_transform(RM_df['h_a'])
 RM_df['situation'] = label_encoder.fit_transform(RM_df['situation'])

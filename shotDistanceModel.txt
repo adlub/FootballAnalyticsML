@@ -1,2 +1,0 @@
-coef_ShotDistance: 0.12071435657335285
-coef_D_Intercept: 0.023491349456188616
