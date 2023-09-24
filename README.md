@@ -77,7 +77,7 @@ I recommend running `logisticRegressionXG.py` first. As well as the relevant plo
 
 Once you have run these files, you can then run the other python files (in any order) that correspond to the use of other classification models on football shot data. 
 
-`Classification Results.xlsx` contains the performance metrics of all the models used in this project. This file currently contains data from when I personally ran the models on Real Madrid's shot data from 2019 (extracted using the site linked above). You can change the data at your discretion when you run run the models yourself.
+`Classification Results.xlsx` contains the performance metrics of all the models used in this project. This file currently contains data from when I personally ran the models on Real Madrid's shot data from 2019 (extracted using the site linked above). You can change the data at your discretion when you run the models yourself.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
