@@ -7,9 +7,9 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+<div align="center"> 
   <a href="https://github.com/adlub/FootballAnalyticsML">
-    <img src="https://media.licdn.com/dms/image/sync/D4D27AQEgQKcKqcoX3w/articleshare-shrink_800/0/1694714379879?e=1696032000&v=beta&t=BJr6RD_6uRV7N8vdfgYQdmimNscFqSYOlL8581TxhJA" alt="Logo" width="80" height="80">
+    <img src="https://media.licdn.com/dms/image/sync/D4D27AQEgQKcKqcoX3w/articleshare-shrink_800/0/1699567958368?e=1700780400&v=beta&t=FLe7BLhRdtcptp85BzoHaBZwMPaKlEY5IRArwj88oSg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">FootballAnalyticsML</h3>
